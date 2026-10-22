@@ -1,9 +1,7 @@
 name: Weekly digest ggm_news
 
 on:
-  schedule:
-    - cron: "50 13 * * 5"   # каждую пятницу в 17:00 по Москве (14:00 UTC)
-  workflow_dispatch:        # кнопка ручного запуска
+  workflow_dispatch:   # запуск кнопкой или из n8n (пт 17:00 МСК)
 
 jobs:
   digest:
@@ -22,4 +20,4 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CHANNEL: ggm_news
           DAYS: "7"
-          TOP_N: "7"
+          TOP_N: "20"
