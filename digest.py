@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 # ---------- Настройки (меняются в digest.yml) ----------
 CHANNEL = os.environ.get("CHANNEL", "ggm_news")
 DAYS = int(os.environ.get("DAYS", "7"))
-TOP_N = int(os.environ.get("TOP_N", "7"))
+TOP_N = int(os.environ.get("TOP_N", "20"))
 MODEL = os.environ.get("MODEL", "claude-sonnet-5-5")
 HEADER = os.environ.get("HEADER", "Дайджест новостей за прошедшую неделю 📰")
 INTRO = os.environ.get("INTRO", "Собрали для вас главные новости индустрии за неделю.")
@@ -101,7 +101,7 @@ def summarize(posts):
         "https://api.anthropic.com/v1/messages",
         headers={"x-api-key": API_KEY, "anthropic-version": "2023-06-01",
                  "content-type": "application/json"},
-        json={"model": MODEL, "max_tokens": 4000,
+        json={"model": MODEL, "max_tokens": 8000,
               "messages": [{"role": "user", "content": PROMPT.format(top_n=TOP_N, corpus=corpus)}]},
         timeout=300,
     )
